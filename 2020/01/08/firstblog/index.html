@@ -46,17 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="搭建博客的这项工作，从去年年底直拖到了现在，可以说真是自己拖拉性格的鲜明反映。 这里简单记录一下搭建本博客的过程中参考的教程和遇到的一些问题，寄希望于日后能够有时间和意愿回过头来再仔细地琢磨一下。 参考文档 使用GitHub Pages和Hexo搭建个人博客 来自ryanluoxu的简洁教程 csdn上的超详细教程，也是我在部署过程的主要参考文章  有关hexo的相关指令 hexo官方中文文档">
+  <meta name="description" content="搭建博客的这项工作，从去年年底直拖到了现在，可以说真是自己拖拉性格的鲜明反映。 这里简单记录一下搭建本博客的过程中参考的教程和遇到的一些问题，寄希望于日后能够有时间和意愿回过头来再仔细地琢磨一下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="firstblog">
 <meta property="og:url" content="https://lecranek.github.io/2020/01/08/firstblog/index.html">
 <meta property="og:site_name" content="lecranek&#39;s blog">
-<meta property="og:description" content="搭建博客的这项工作，从去年年底直拖到了现在，可以说真是自己拖拉性格的鲜明反映。 这里简单记录一下搭建本博客的过程中参考的教程和遇到的一些问题，寄希望于日后能够有时间和意愿回过头来再仔细地琢磨一下。 参考文档 使用GitHub Pages和Hexo搭建个人博客 来自ryanluoxu的简洁教程 csdn上的超详细教程，也是我在部署过程的主要参考文章  有关hexo的相关指令 hexo官方中文文档">
+<meta property="og:description" content="搭建博客的这项工作，从去年年底直拖到了现在，可以说真是自己拖拉性格的鲜明反映。 这里简单记录一下搭建本博客的过程中参考的教程和遇到的一些问题，寄希望于日后能够有时间和意愿回过头来再仔细地琢磨一下。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-01-08T05:07:43.783Z">
-<meta property="article:modified_time" content="2020-01-09T06:01:39.736Z">
+<meta property="article:published_time" content="2020-01-08T05:07:43.000Z">
+<meta property="article:modified_time" content="2020-01-09T06:36:58.355Z">
 <meta property="article:author" content="lecranek">
-<meta property="article:tag" content="搭建博客">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="NexT">
+<meta property="article:tag" content="Bulid a blog">
+<meta property="article:tag" content="GitHub Pages">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://lecranek.github.io/2020/01/08/firstblog/">
@@ -215,10 +218,28 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-09 14:01:39" itemprop="dateModified" datetime="2020-01-09T14:01:39+08:00">2020-01-09</time>
+                <time title="Modified: 2020-01-09 14:36:58" itemprop="dateModified" datetime="2020-01-09T14:36:58+08:00">2020-01-09</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">front-end</span>
+                  </a>
+                </span>
+            </span>
 
           
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -231,6 +252,9 @@
       
         <p>搭建博客的这项工作，从去年年底直拖到了现在，可以说真是自己拖拉性格的鲜明反映。</p>
 <p>这里简单记录一下搭建本博客的过程中参考的教程和遇到的一些问题，寄希望于日后能够有时间和意愿回过头来再仔细地琢磨一下。</p>
+<a id="more"></a>
+
+
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
 <li><p><strong>使用GitHub Pages和Hexo搭建个人博客</strong></p>
 <p>来自ryanluoxu的<a href="https://ryanluoxu.github.io/2017/11/24/%E7%94%A8-Hexo-%E5%92%8C-GitHub-Pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">简洁教程</a></p>
@@ -274,11 +298,6 @@
 <p>猜测可能与本机有多个Github账号有关？</p>
 </li>
 </ol>
-<h2 id="有待实现的一些想法"><a href="#有待实现的一些想法" class="headerlink" title="有待实现的一些想法"></a>有待实现的一些想法</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> 主页添加更多选项卡</li>
-<li><input disabled="" type="checkbox"> 文章front matter中加入更多信息</li>
-<li><input disabled="" type="checkbox"> 添加头像</li>
-</ul>
 
     </div>
 
@@ -288,7 +307,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag"># 搭建博客</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/NexT/" rel="tag"># NexT</a>
+              <a href="/tags/Bulid-a-blog/" rel="tag"># Bulid a blog</a>
+              <a href="/tags/GitHub-Pages/" rel="tag"># GitHub Pages</a>
           </div>
 
         
@@ -363,7 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">1.</span> <span class="nav-text">参考文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程中的一些小问题"><span class="nav-number">2.</span> <span class="nav-text">搭建过程中的一些小问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有待实现的一些想法"><span class="nav-number">3.</span> <span class="nav-text">有待实现的一些想法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">1.</span> <span class="nav-text">参考文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程中的一些小问题"><span class="nav-number">2.</span> <span class="nav-text">搭建过程中的一些小问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -383,10 +405,16 @@
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -425,10 +453,30 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共626字</span>
+  <span class="post-count">博客全站共593字</span>
 </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
