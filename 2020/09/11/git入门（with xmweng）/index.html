@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://lecranek.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="git区域图解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git入门（with xmweng）">
+<meta property="og:url" content="https://lecranek.github.io/2020/09/11/git%E5%85%A5%E9%97%A8%EF%BC%88with%20xmweng%EF%BC%89/index.html">
+<meta property="og:site_name" content="lecranek&#39;s blog">
+<meta property="og:description" content="git区域图解">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://chuantu.xyz/t6/740/1599797236x992239408.png">
+<meta property="og:image" content="http://chuantu.xyz/t6/740/1599794303x1700340447.png">
+<meta property="og:image" content="http://chuantu.xyz/t6/740/1599796059x977013264.png">
+<meta property="og:image" content="http://chuantu.xyz/t6/740/1599791718x992239408.png">
+<meta property="article:published_time" content="2020-09-11T03:59:43.000Z">
+<meta property="article:modified_time" content="2020-09-11T04:08:56.189Z">
+<meta property="article:author" content="lecranek">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chuantu.xyz/t6/740/1599797236x992239408.png">
+
+<link rel="canonical" href="https://lecranek.github.io/2020/09/11/git%E5%85%A5%E9%97%A8%EF%BC%88with%20xmweng%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>git入门（with xmweng） | lecranek's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lecranek's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lecranek.github.io/2020/09/11/git%E5%85%A5%E9%97%A8%EF%BC%88with%20xmweng%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lecranek">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lecranek's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git入门（with xmweng）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-09-11 11:59:43 / Modified: 12:08:56" itemprop="dateCreated datePublished" datetime="2020-09-11T11:59:43+08:00">2020-09-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/backend/" itemprop="url" rel="index">
+                    <span itemprop="name">backend</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="git区域图解"><a href="#git区域图解" class="headerlink" title="git区域图解"></a>git区域图解</h4><p><img src="http://chuantu.xyz/t6/740/1599797236x992239408.png" alt="img"></p>
+<a id="more"></a>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">remote           <span class="comment"># 远端仓库</span></span><br><span class="line">repository       <span class="comment"># 本地仓库</span></span><br><span class="line">index            <span class="comment"># 暂存区</span></span><br><span class="line">workspace        <span class="comment"># 工作区域，也就是我们平常看到的文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 任意一个git仓库中，都会有一个.git文件夹记录仓库的信息，存储版本变更的信息</span></span><br><span class="line"><span class="comment"># 不要修改.git文件夹中的任何内容</span></span><br><span class="line"></span><br><span class="line">git init         <span class="comment"># 在空目录下初始化一个git仓库，完成后将可以在目录下看到新生成一个.git文件夹</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="git指令大致顺序"><a href="#git指令大致顺序" class="headerlink" title="git指令大致顺序"></a>git指令大致顺序</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本地仓库</span></span><br><span class="line">add -&gt; commit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包含远端仓库</span></span><br><span class="line">add -&gt; commit -&gt; pull -&gt; push</span><br></pre></td></tr></table></figure>
+
+<h4 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git add <span class="variable">$file_name</span>                         <span class="comment"># 将文件添加到暂存区，$后面的表示这是一个变量名</span></span><br><span class="line">                                           <span class="comment"># eg: git add readme.md  添加指定文件</span></span><br><span class="line">git add .                                  <span class="comment"># 添加所有</span></span><br><span class="line"></span><br><span class="line">git commit -m <span class="string">"modify readme.md"</span>           <span class="comment"># 提交暂存区的修改到本地仓库  </span></span><br><span class="line">                                           <span class="comment"># -m 参数是添加注释来表明这次commit做了什么工作</span></span><br><span class="line">                                           <span class="comment"># 为方便记录版本信息，一般最好用一句话描述</span></span><br><span class="line">git commit -a -m <span class="string">"modify readme.md"</span>        <span class="comment"># 可以使用-a参数来把先add再commit的过程变成一步</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git pull                                   <span class="comment"># 拉取远端仓库的信息更新本地</span></span><br><span class="line"></span><br><span class="line">git push                                   <span class="comment"># 将本地仓库推送到远端仓库</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status                                 <span class="comment"># 查看项目当前的状态</span></span><br><span class="line">git <span class="built_in">log</span>                                    <span class="comment"># 查看版本变更信息，按 q 退出</span></span><br><span class="line">git <span class="built_in">clone</span> <span class="variable">$https</span>:....                      <span class="comment"># 采用https协议或者ssh协议克隆一个仓库</span></span><br><span class="line">git remote -v                              <span class="comment"># 查看远端仓库的地址</span></span><br><span class="line">git branch                                 <span class="comment"># 查看当前仓库的所有分支</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="分布式开发的正确顺序"><a href="#分布式开发的正确顺序" class="headerlink" title="分布式开发的正确顺序"></a>分布式开发的正确顺序</h4><p>以我们的仓库work_two_people为例，在gitee上建立这个远端仓库的目的就是，无论是@wch还是@wxm对代码进行了更改，都会把更改推送到远端仓库。<br>另一个人在进行开发的时候，将远端仓库pull下来，就可以获得对方进行的所有更新，从而保证代码是一致的。</p>
+<p>我们两个的开发较为简单，一般不会进行同时开发，所以我们可以在修改代码之前先进行pull，然后再开始修改代码。这样就可以保证我们每次修改都是在最新版本上进行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pull -&gt; add -&gt; commit -&gt; push</span><br></pre></td></tr></table></figure>
+
+<p>当然，一般情况下的正确顺序是应该：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pull -&gt; add -&gt; commit -&gt; pull -&gt; push</span><br></pre></td></tr></table></figure>
+
+<p>因为在同时开发的时候，我们无法确定自己修改完代码commit到本地仓库之后，远端仓库是否已经被更新，所以要在push之前再进行pull，以确保代码是最新的。</p>
+<h4 id="冲突区域的解决"><a href="#冲突区域的解决" class="headerlink" title="冲突区域的解决"></a>冲突区域的解决</h4><p>以下内容可以只做了解，因为我们的开发不同时进行，暂且不会发生冲突。</p>
+<p><code>git pull</code> 命令会以自动merge的方式将远端仓库的更新拉回本地，如果这些更新与本地没有冲突时，将会自动执行，并且返回成功的结果，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/gitee/<span class="built_in">test</span> (master)</span><br><span class="line">$ git pull</span><br><span class="line">remote: Enumerating objects: 13, <span class="keyword">done</span>.</span><br><span class="line">remote: Counting objects: 100% (12/12), <span class="keyword">done</span>.</span><br><span class="line">remote: Compressing objects: 100% (5/5), <span class="keyword">done</span>.</span><br><span class="line">remote: Total 7 (delta 2), reused 0 (delta 0), pack-reused 0</span><br><span class="line">Unpacking objects: 100% (7/7), 655 bytes | 36.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">From https://gitee.com/lecranek/<span class="built_in">test</span></span><br><span class="line">   f3b1bd2..e4c938e  master     -&gt; origin/master</span><br><span class="line">Updating f3b1bd2..e4c938e</span><br><span class="line">Fast-forward</span><br><span class="line"> test4.txt | 2 ++</span><br><span class="line"> test5.txt | 1 +</span><br><span class="line"> 2 files changed, 3 insertions(+)</span><br></pre></td></tr></table></figure>
+
+<p>当远端仓库与本地文件的修改发生了冲突，才会让用户手动去解决这些冲突，</p>
+<p>例如我在11:10同时克隆了一个test仓库到A和B两个机器。<br>A机器上对 <code>test5.txt</code> 第4行添加了 <code>there is a change</code>，并在11:15将这次提交push到了remote上。<br>在B机器则是对<code>test5.txt</code> 第4行添加了 <code>it is hard to say the result</code> ,当我只使用 <code>git add .</code> 暂存这些修改并想在11:20进行 <code>pull</code> 来更新我的代码，git将会提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git pull</span><br><span class="line">remote: Enumerating objects: 5, <span class="keyword">done</span>.</span><br><span class="line">remote: Counting objects: 100% (5/5), <span class="keyword">done</span>.</span><br><span class="line">remote: Compressing objects: 100% (2/2), <span class="keyword">done</span>.</span><br><span class="line">remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0</span><br><span class="line">Unpacking objects: 100% (3/3), 261 bytes | 18.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">From https://gitee.com/lecranek/<span class="built_in">test</span></span><br><span class="line">   0dbb19c..f3b1bd2  master     -&gt; origin/master</span><br><span class="line">error: Your <span class="built_in">local</span> changes to the following files would be overwritten by merge:</span><br><span class="line">        test5.txt</span><br><span class="line">Please commit your changes or stash them before you merge.</span><br><span class="line">Aborting</span><br><span class="line">Updating 0dbb19c..f3b1bd2</span><br><span class="line"></span><br><span class="line"><span class="comment"># error说明产生了冲突，必须要先在本地commit或者stash操作，才能完成pull的更新</span></span><br></pre></td></tr></table></figure>
+
+<p>于是我们将B机器上的这次修改进行一个提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git commit -m <span class="string">"modify test4 &amp; test5 in test repo"</span></span><br><span class="line">[master 80f6768] modify test4 &amp; test5 <span class="keyword">in</span> <span class="built_in">test</span> repo</span><br><span class="line"> 2 files changed, 4 insertions(+)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 这说明B机器本地commit完成</span></span><br></pre></td></tr></table></figure>
+
+<p>再次使用 <code>git pull</code> 命令，git提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git pull</span><br><span class="line">Auto-merging test5.txt</span><br><span class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> test5.txt</span><br><span class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</span><br><span class="line"></span><br><span class="line"><span class="comment"># git pull的自动merge方案失败，需要用户手动解决这些冲突</span></span><br></pre></td></tr></table></figure>
+
+<p>这时我们再打开 <code>test5.txt</code> ，会看到git在这个文件中标识出了冲突区域。<br>下图中所有的汉字提示都是vscode自动标识的，可以很方便的帮助我们选择保留哪种更改方案。</p>
+<img src="http://chuantu.xyz/t6/740/1599794303x1700340447.png" alt="img"  />
+
+<p>例如我们选择“保留双方更改”，文档将变更为</p>
+<p><img src="http://chuantu.xyz/t6/740/1599796059x977013264.png" alt="img"></p>
+<p>这时我们已经解决了冲突，使用 <code>add -&gt; commit</code> 就可以解决这些冲突，git会自动完成merge的过程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master|MERGING)</span><br><span class="line">$ git commit -a -m <span class="string">"merge both modified test5.txt"</span></span><br><span class="line">[master e4c938e] merge both modified test5.txt</span><br><span class="line"></span><br><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is ahead of <span class="string">'origin/master'</span> by 2 commits.</span><br><span class="line">  (use <span class="string">"git push"</span> to publish your <span class="built_in">local</span> commits)</span><br><span class="line"></span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line"></span><br><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git push</span><br><span class="line">Enumerating objects: 13, <span class="keyword">done</span>.</span><br><span class="line">Counting objects: 100% (12/12), <span class="keyword">done</span>.</span><br><span class="line">Delta compression using up to 8 threads</span><br><span class="line">Compressing objects: 100% (5/5), <span class="keyword">done</span>.</span><br><span class="line">Writing objects: 100% (7/7), 675 bytes | 675.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Total 7 (delta 2), reused 0 (delta 0), pack-reused 0</span><br><span class="line">remote: Powered by GITEE.COM [GNK-5.0]</span><br><span class="line">To https://gitee.com/lecranek/test.git</span><br><span class="line">   f3b1bd2..e4c938e  master -&gt; master</span><br></pre></td></tr></table></figure>
+
+<h4 id="git-bash命令简述（简单了解linux命令）"><a href="#git-bash命令简述（简单了解linux命令）" class="headerlink" title="git bash命令简述（简单了解linux命令）"></a>git bash命令简述（简单了解linux命令）</h4><p>git bash中的命令是基于linux的，复制粘贴使用鼠标右键，<code>ctrl+C</code> 这个快捷键代表中断一个命令的执行</p>
+<p>下图中红色标识部分表示用户所在的路径，执行命令都是在这里显示的路径下执行的</p>
+<p><img src="http://chuantu.xyz/t6/740/1599791718x992239408.png" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>              <span class="comment"># 打印当前所在路径</span></span><br><span class="line"></span><br><span class="line">ls               <span class="comment"># 显示当前路径下所有文件</span></span><br><span class="line">ls -a            <span class="comment"># 显示所有文件（包括隐藏文件），linux中以"."开头的都是隐藏文件</span></span><br><span class="line">ls -l            <span class="comment"># 显示所有文件，同时显示文件的权限信息</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$folder_name</span>     <span class="comment"># 进入某个文件夹</span></span><br><span class="line"><span class="built_in">cd</span> ..               <span class="comment"># 进入当前位置的上一级目录</span></span><br><span class="line"></span><br><span class="line">cat <span class="variable">$file_name</span>   <span class="comment"># 在终端界面上直接显示文件内容</span></span><br><span class="line">                 <span class="comment"># eg: cat ~/.ssh/id_rsa.pub   昨天使用的这个指令就是显示id_rsa.pub文件中的内容</span></span><br><span class="line"></span><br><span class="line">vim <span class="variable">$file_name</span>      <span class="comment"># 使用vim编辑一个文件</span></span><br><span class="line">                    <span class="comment"># vim是linux中一个非常强大的文本编辑器，暂时不用太多了解</span></span><br><span class="line">                    <span class="comment"># 可以参考 https://www.runoob.com/linux/linux-vim.html</span></span><br><span class="line">                    <span class="comment"># 之前使用的 git log 就是以vim打开的</span></span><br><span class="line"></span><br><span class="line">clear             <span class="comment"># 清空当前终端窗口所有显示的内容</span></span><br><span class="line"></span><br><span class="line">~         <span class="comment"># linux下这个符号表示当前用户的根目录，在windows中即代表C:\Users\kkklebron</span></span><br><span class="line">          <span class="comment"># 命令行前面的 kkklebron@LAPTOP-B77TN552 就表示当前用户@当前机器</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/08/%E4%BC%98%E5%8C%96next%E4%B8%BB%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/" rel="prev" title="优化next主题的记录">
+      <i class="fa fa-chevron-left"></i> 优化next主题的记录
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#git区域图解"><span class="nav-number">1.</span> <span class="nav-text">git区域图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git指令大致顺序"><span class="nav-number">2.</span> <span class="nav-text">git指令大致顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用指令"><span class="nav-number">3.</span> <span class="nav-text">常用指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式开发的正确顺序"><span class="nav-number">4.</span> <span class="nav-text">分布式开发的正确顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冲突区域的解决"><span class="nav-number">5.</span> <span class="nav-text">冲突区域的解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-bash命令简述（简单了解linux命令）"><span class="nav-number">6.</span> <span class="nav-text">git bash命令简述（简单了解linux命令）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lecranek"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lecranek</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lecranek</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共2.2k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
