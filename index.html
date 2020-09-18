@@ -205,7 +205,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-09-18 14:45:07 / Modified: 14:49:19" itemprop="dateCreated datePublished" datetime="2020-09-18T14:45:07+08:00">2020-09-18</time>
+              <time title="Created: 2020-09-18 14:45:07 / Modified: 14:56:36" itemprop="dateCreated datePublished" datetime="2020-09-18T14:45:07+08:00">2020-09-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,40 +237,14 @@
 
       
           <h3 id="hexo博客图床的搭建与选择"><a href="#hexo博客图床的搭建与选择" class="headerlink" title="hexo博客图床的搭建与选择"></a>hexo博客图床的搭建与选择</h3><p>考虑到目前本博客的使用频率和更新质量都不高，暂时不使用任何付费性质的服务进行博客完善。因此，最好的图床方案即是使用一些git托管平台作为图床仓库。</p>
-<p>上传工具：<a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">PicGo</a>；<a href="https://github.com/jrainlau/picee" target="_blank" rel="noopener">Picee</a>；<a href="https://github.com/AdiEcho/MDPIC" target="_blank" rel="noopener">MDPIC</a></p>
-<p>图床仓库：Github；Gitee</p>
-<p>Markdown编辑器：Typora</p>
-<h4 id="Typora-PicGo-Github"><a href="#Typora-PicGo-Github" class="headerlink" title="Typora + PicGo + Github"></a>Typora + PicGo + Github</h4><p>官方参考文档：<a href="https://picgo.github.io/PicGo-Doc/zh/guide/advance.html#http%E8%B0%83%E7%94%A8%E4%B8%8A%E4%BC%A0%E5%85%B7%E4%BD%93%E8%B7%AF%E5%BE%84%E5%9B%BE%E7%89%87" target="_blank" rel="noopener">PicGo命令行上传</a>；<a href="https://support.typora.io/Upload-Image/#picgoapp-chinese-language-only" target="_blank" rel="noopener">Typora与PicGo</a></p>
-<blockquote>
-<p>To use with Typora, we require PicGo ≥ 2.2.0 with <a href="https://picgo.github.io/PicGo-Doc/zh/guide/config.html#picgo-server设置" target="_blank" rel="noopener">PicGo-Server</a> enabled and use port in default value (36677). And when Typora upload images using PicGo, PicGo will be launched and kept running.</p>
-</blockquote>
-<p>参考博客：<a href="https://blog.csdn.net/S_winner_S/article/details/107511066" target="_blank" rel="noopener">工具使用篇–typora+picGo实现图片上传</a>；<a href="https://www.flighty.cn/html/tutorial/20200217_576.html" target="_blank" rel="noopener">使用 PicGo+GitHub 打造最稳定可靠的免费图床</a>；<a href="https://www.cnblogs.com/lfri/p/12210721.html" target="_blank" rel="noopener">GitHub+jsDelivr+PicGo搭建快速免费图床</a></p>
-<p>PicGo的安装与操作都相当简便，若使用Typora内置的图片处理功能调用PicGo完成图片上传，将使得上传图片的过程更加无感。</p>
-<h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><p>但是这其中仍存在一个问题，由于PicGo本身上传方案的制约，我们只能将所有图片上传到git仓库的单一目录下，因而无法在仓库中对图片进行有效的管理。<br>另一方面，对于存储于剪贴板中的图片，Typora的处理方式是首先将其写入<code>%APPDATA%/Typora/typora-user-images</code>目录，再使用PicGo上传，这无疑会使得该目录越发臃肿。</p>
-<p>为解决这两个问题，最好的方法就是自编写一个脚本，使用Typora提供的<code>cutsom command line</code>上传方式，调用脚本完成上传。考虑到我们从一开始就确定使用Git仓库作为图床，那么使用脚本完成图片上传的过程将格外简单，只需要基于原生的git命令即可。</p>
-<h4 id="Typora-自定义py脚本-Gitee-实现以文档名称为目录分类管理的图床"><a href="#Typora-自定义py脚本-Gitee-实现以文档名称为目录分类管理的图床" class="headerlink" title="Typora + 自定义py脚本 + Gitee 实现以文档名称为目录分类管理的图床"></a>Typora + 自定义py脚本 + Gitee 实现以文档名称为目录分类管理的图床</h4><p>官方参考文档：<a href="https://support.typora.io/Upload-Image/#custom" target="_blank" rel="noopener">Typora Doc: upload-image/custom</a></p>
-<p>参考博客：<a href="https://blog.csdn.net/weixin_38821611/article/details/107189979" target="_blank" rel="noopener">Hexo博客图床搭建与图片管理</a>；<a href="https://opsolo.com/hexo/hexo-picgo-cdn-shell/" target="_blank" rel="noopener">脚本自动化压缩图片+上传PicGo指定目录+jsDelivrCDN</a></p>
-<p>我对于脚本的需求主要有两点：</p>
-<ol>
-<li>能将图片上传至相关的markdown文档目录下，例如<code>${image_repo}/${filename}.assets/</code>，便于博客图片的管理。</li>
-<li>复制图片进入Typora时将<code>%APPDATA%</code>文件剪切至local git repo。</li>
-</ol>
-<p>实现这些功能并不复杂，使用python进行git操作可以参考<a href="https://cloud.tencent.com/developer/article/1520592" target="_blank" rel="noopener">如何使用 Python 操作 Git 代码？GitPython 入门介绍</a>。</p>
-<p><a href="https://gitee.com/lecranek/blog_image/blob/master/typora-upload-img.py" target="_blank" rel="noopener">这里</a>是为脚本源码地址。</p>
-<p>写完脚本以后，在Typora<code>文件-偏好设置-图像</code>中按照图示设置，大功告成！</p>
-<p><img src="https://gitee.com/lecranek/blog_image/raw/master/2020-09-18-hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9.assets/image-20200918144554424.png" alt="image-20200918144554424"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Custom Command</span><br><span class="line">python <span class="variable">$&#123;local_repo_path&#125;</span>\typora-upload-img.py --mdfile <span class="string">"<span class="variable">$&#123;filename&#125;</span>"</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h5><ul>
-<li><p>若md文件为中文名称，或含有空格等，需要将图片URL地址进行转义</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># remote repo URL</span></span><br><span class="line">https://gitee.com/lecranek/blog_image/raw/master/git%E5%<span class="number">85</span>%A5%E9%<span class="number">97</span>%A8(<span class="keyword">with</span>%<span class="number">20</span>xmweng).assets/<span class="number">5.</span>png</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用urllib.parse.quote()转义</span></span><br><span class="line">https://gitee.com/lecranek/blog_image/raw/master/git%E5%<span class="number">85</span>%A5%E9%<span class="number">97</span>%A8%<span class="number">28</span><span class="keyword">with</span>%<span class="number">20</span>xmweng%<span class="number">29.</span>assets/<span class="number">5.</span>png</span><br></pre></td></tr></table></figure>
-
-<p>参考<a href="https://www.w3school.com.cn/tags/html_ref_urlencode.html" target="_blank" rel="noopener">HTML URL 编码</a>；<a href="https://www.cnblogs.com/caicaihong/p/5687522.html" target="_blank" rel="noopener">python中的urlencode与urldecode</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对比以上结果，URL中汉字以utf-8编码</span></span><br><span class="line">&gt;&gt;&gt; <span class="string">"入门"</span>.encode(encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">b<span class="string">'\xe5\x85\xa5\xe9\x97\xa8'</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/18/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
