@@ -46,27 +46,38 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lecranek&#39;s blog">
-<meta property="og:url" content="https://lecranek.github.io/index.html">
+  <meta name="description" content="hexo博客图床的搭建与选择考虑到目前本博客的使用频率和更新质量都不高，暂时不使用任何付费性质的服务进行博客完善。因此，最好的图床方案即是使用一些git托管平台作为图床仓库。 上传工具：PicGo；Picee；MDPIC 图床仓库：Github；Gitee Markdown编辑器：Typora Typora + PicGo + Github官方参考文档：PicGo命令行上传；Typora与PicG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo博客图床的搭建与选择">
+<meta property="og:url" content="https://lecranek.github.io/2020/09/18/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9/index.html">
 <meta property="og:site_name" content="lecranek&#39;s blog">
+<meta property="og:description" content="hexo博客图床的搭建与选择考虑到目前本博客的使用频率和更新质量都不高，暂时不使用任何付费性质的服务进行博客完善。因此，最好的图床方案即是使用一些git托管平台作为图床仓库。 上传工具：PicGo；Picee；MDPIC 图床仓库：Github；Gitee Markdown编辑器：Typora Typora + PicGo + Github官方参考文档：PicGo命令行上传；Typora与PicG">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/2020-09-18-hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9.assets/image-20200918144554424.png">
+<meta property="article:published_time" content="2020-09-18T06:45:07.000Z">
+<meta property="article:modified_time" content="2020-09-18T06:49:19.109Z">
 <meta property="article:author" content="lecranek">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Image Hosting">
+<meta property="article:tag" content="Typora">
+<meta property="article:tag" content="PicGo">
+<meta property="article:tag" content="GitPython">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/lecranek/blog_image/raw/master/2020-09-18-hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9.assets/image-20200918144554424.png">
 
-<link rel="canonical" href="https://lecranek.github.io/">
+<link rel="canonical" href="https://lecranek.github.io/2020/09/18/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>lecranek's blog</title>
+  <title>hexo博客图床的搭建与选择 | lecranek's blog</title>
   
 
 
@@ -176,10 +187,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
     <link itemprop="mainEntityOfPage" href="https://lecranek.github.io/2020/09/18/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -193,8 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/18/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9/" class="post-title-link" itemprop="url">hexo博客图床的搭建与选择</a>
+          hexo博客图床的搭建与选择
         </h1>
 
         <div class="post-meta">
@@ -226,6 +236,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -236,7 +253,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="hexo博客图床的搭建与选择"><a href="#hexo博客图床的搭建与选择" class="headerlink" title="hexo博客图床的搭建与选择"></a>hexo博客图床的搭建与选择</h3><p>考虑到目前本博客的使用频率和更新质量都不高，暂时不使用任何付费性质的服务进行博客完善。因此，最好的图床方案即是使用一些git托管平台作为图床仓库。</p>
+        <h3 id="hexo博客图床的搭建与选择"><a href="#hexo博客图床的搭建与选择" class="headerlink" title="hexo博客图床的搭建与选择"></a>hexo博客图床的搭建与选择</h3><p>考虑到目前本博客的使用频率和更新质量都不高，暂时不使用任何付费性质的服务进行博客完善。因此，最好的图床方案即是使用一些git托管平台作为图床仓库。</p>
 <p>上传工具：<a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">PicGo</a>；<a href="https://github.com/jrainlau/picee" target="_blank" rel="noopener">Picee</a>；<a href="https://github.com/AdiEcho/MDPIC" target="_blank" rel="noopener">MDPIC</a></p>
 <p>图床仓库：Github；Gitee</p>
 <p>Markdown编辑器：Typora</p>
@@ -271,274 +288,40 @@
 </li>
 </ul>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Image-Hosting/" rel="tag"># Image Hosting</a>
+              <a href="/tags/Typora/" rel="tag"># Typora</a>
+              <a href="/tags/PicGo/" rel="tag"># PicGo</a>
+              <a href="/tags/GitPython/" rel="tag"># GitPython</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lecranek.github.io/2020/09/11/git%E5%85%A5%E9%97%A8-with-xmweng/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lecranek">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lecranek's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/11/git%E5%85%A5%E9%97%A8-with-xmweng/" class="post-title-link" itemprop="url">git入门(with xmweng)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-11 11:59:43" itemprop="dateCreated datePublished" datetime="2020-09-11T11:59:43+08:00">2020-09-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-18 11:24:57" itemprop="dateModified" datetime="2020-09-18T11:24:57+08:00">2020-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/backend/" itemprop="url" rel="index">
-                    <span itemprop="name">backend</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="git区域图解"><a href="#git区域图解" class="headerlink" title="git区域图解"></a>git区域图解</h4><img src="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/5.png" alt="5" style="zoom: 50%;" />
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/11/git%E5%85%A5%E9%97%A8-with-xmweng/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/11/git%E5%85%A5%E9%97%A8-with-xmweng/" rel="prev" title="git入门(with xmweng)">
+      <i class="fa fa-chevron-left"></i> git入门(with xmweng)
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lecranek.github.io/2020/01/08/%E4%BC%98%E5%8C%96blog%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lecranek">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lecranek's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/08/%E4%BC%98%E5%8C%96blog%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">优化blog记录</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-08 15:31:49" itemprop="dateCreated datePublished" datetime="2020-01-08T15:31:49+08:00">2020-01-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-11 15:40:27" itemprop="dateModified" datetime="2020-09-11T15:40:27+08:00">2020-09-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/frontend/" itemprop="url" rel="index">
-                    <span itemprop="name">frontend</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="NexT-Theme"><a href="#NexT-Theme" class="headerlink" title="NexT Theme"></a>NexT Theme</h2><h3 id="修改-Next-主题的-Scheme"><a href="#修改-Next-主题的-Scheme" class="headerlink" title="修改 Next 主题的 Scheme"></a>修改 Next 主题的 Scheme</h3><p>Next 默认的风格是 Muse。从现有的四个风格里，修改为 Gemini。<br>在此风格的博客首页里，每篇博客有明显的分割。菜单在左侧，方便访问时转到别的页面。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/08/%E4%BC%98%E5%8C%96blog%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lecranek.github.io/2020/01/08/firstblog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lecranek">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lecranek's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/08/firstblog/" class="post-title-link" itemprop="url">firstblog</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-08 13:07:43" itemprop="dateCreated datePublished" datetime="2020-01-08T13:07:43+08:00">2020-01-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-11 12:04:41" itemprop="dateModified" datetime="2020-09-11T12:04:41+08:00">2020-09-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/frontend/" itemprop="url" rel="index">
-                    <span itemprop="name">frontend</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>搭建博客的这项工作，从去年年底直拖到了现在，可以说真是自己拖拉性格的鲜明反映。</p>
-<p>这里简单记录一下搭建本博客的过程中参考的教程和遇到的一些问题，寄希望于日后能够有时间和意愿回过头来再仔细地琢磨一下。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/08/firstblog/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -589,6 +372,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo博客图床的搭建与选择"><span class="nav-number">1.</span> <span class="nav-text">hexo博客图床的搭建与选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora-PicGo-Github"><span class="nav-number">1.1.</span> <span class="nav-text">Typora + PicGo + Github</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora-自定义py脚本-Gitee-实现以文档名称为目录分类管理的图床"><span class="nav-number">1.2.</span> <span class="nav-text">Typora + 自定义py脚本 + Gitee 实现以文档名称为目录分类管理的图床</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Debug"><span class="nav-number">1.2.1.</span> <span class="nav-text">Debug</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
