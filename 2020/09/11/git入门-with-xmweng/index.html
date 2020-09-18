@@ -53,17 +53,17 @@
 <meta property="og:site_name" content="lecranek&#39;s blog">
 <meta property="og:description" content="git区域图解">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://chuantu.xyz/t6/740/1599797236x992239408.png">
-<meta property="og:image" content="http://chuantu.xyz/t6/740/1599794303x1700340447.png">
-<meta property="og:image" content="http://chuantu.xyz/t6/740/1599796059x977013264.png">
-<meta property="og:image" content="http://chuantu.xyz/t6/740/1599791718x992239408.png">
+<meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/5.png">
+<meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/image-20200918111822360.png">
+<meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/image-20200918111928758.png">
+<meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/image-20200918112429382.png">
 <meta property="article:published_time" content="2020-09-11T03:59:43.000Z">
-<meta property="article:modified_time" content="2020-09-11T06:16:35.578Z">
+<meta property="article:modified_time" content="2020-09-18T03:24:57.287Z">
 <meta property="article:author" content="lecranek">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://chuantu.xyz/t6/740/1599797236x992239408.png">
+<meta name="twitter:image" content="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/5.png">
 
 <link rel="canonical" href="https://lecranek.github.io/2020/09/11/git%E5%85%A5%E9%97%A8-with-xmweng/">
 
@@ -213,10 +213,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-09-11 11:59:43 / Modified: 14:16:35" itemprop="dateCreated datePublished" datetime="2020-09-11T11:59:43+08:00">2020-09-11</time>
+              <time title="Created: 2020-09-11 11:59:43" itemprop="dateCreated datePublished" datetime="2020-09-11T11:59:43+08:00">2020-09-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-18 11:24:57" itemprop="dateModified" datetime="2020-09-18T11:24:57+08:00">2020-09-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -247,7 +253,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="git区域图解"><a href="#git区域图解" class="headerlink" title="git区域图解"></a>git区域图解</h4><p><img src="http://chuantu.xyz/t6/740/1599797236x992239408.png" alt="img"></p>
+        <h4 id="git区域图解"><a href="#git区域图解" class="headerlink" title="git区域图解"></a>git区域图解</h4><img src="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/5.png" alt="5" style="zoom: 50%;" />
+
 <a id="more"></a>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">remote           <span class="comment"># 远端仓库</span></span><br><span class="line">repository       <span class="comment"># 本地仓库</span></span><br><span class="line">index            <span class="comment"># 暂存区</span></span><br><span class="line">workspace        <span class="comment"># 工作区域，也就是我们平常看到的文件</span></span><br></pre></td></tr></table></figure>
@@ -283,16 +290,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git pull</span><br><span class="line">Auto-merging test5.txt</span><br><span class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> test5.txt</span><br><span class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</span><br><span class="line"></span><br><span class="line"><span class="comment"># git pull的自动merge方案失败，需要用户手动解决这些冲突</span></span><br></pre></td></tr></table></figure>
 
 <p>这时我们再打开 <code>test5.txt</code> ，会看到git在这个文件中标识出了冲突区域。<br>下图中所有的汉字提示都是vscode自动标识的，可以很方便的帮助我们选择保留哪种更改方案。</p>
-<img src="http://chuantu.xyz/t6/740/1599794303x1700340447.png" alt="img"  />
+<img src="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/image-20200918111822360.png" alt="image-20200918111822360" style="zoom:25%;" />
 
 <p>例如我们选择“保留双方更改”，文档将变更为</p>
-<p><img src="http://chuantu.xyz/t6/740/1599796059x977013264.png" alt="img"></p>
+<img src="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/image-20200918111928758.png" alt="image-20200918111928758" style="zoom: 25%;" />
+
 <p>这时我们已经解决了冲突，使用 <code>add -&gt; commit</code> 就可以解决这些冲突，git会自动完成merge的过程</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master|MERGING)</span><br><span class="line">$ git commit -a -m <span class="string">"merge both modified test5.txt"</span></span><br><span class="line">[master e4c938e] merge both modified test5.txt</span><br><span class="line"></span><br><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is ahead of <span class="string">'origin/master'</span> by 2 commits.</span><br><span class="line">  (use <span class="string">"git push"</span> to publish your <span class="built_in">local</span> commits)</span><br><span class="line"></span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line"></span><br><span class="line">kkklebron@LAPTOP-B77TN552 MINGW64 /d/git/<span class="built_in">test</span>/<span class="built_in">test</span> (master)</span><br><span class="line">$ git push</span><br><span class="line">Enumerating objects: 13, <span class="keyword">done</span>.</span><br><span class="line">Counting objects: 100% (12/12), <span class="keyword">done</span>.</span><br><span class="line">Delta compression using up to 8 threads</span><br><span class="line">Compressing objects: 100% (5/5), <span class="keyword">done</span>.</span><br><span class="line">Writing objects: 100% (7/7), 675 bytes | 675.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Total 7 (delta 2), reused 0 (delta 0), pack-reused 0</span><br><span class="line">remote: Powered by GITEE.COM [GNK-5.0]</span><br><span class="line">To https://gitee.com/lecranek/test.git</span><br><span class="line">   f3b1bd2..e4c938e  master -&gt; master</span><br></pre></td></tr></table></figure>
 
 <h4 id="git-bash命令简述（简单了解linux命令）"><a href="#git-bash命令简述（简单了解linux命令）" class="headerlink" title="git bash命令简述（简单了解linux命令）"></a>git bash命令简述（简单了解linux命令）</h4><p>git bash中的命令是基于linux的，复制粘贴请使用鼠标右键。<br><code>ctrl+C</code> 这个快捷键代表中断一个命令的执行。</p>
 <p>下图中红色标识部分表示用户所在的路径，执行命令都是在这里显示的路径下执行的。</p>
-<p><img src="http://chuantu.xyz/t6/740/1599791718x992239408.png" alt="img"></p>
+<img src="https://gitee.com/lecranek/blog_image/raw/master/git%E5%85%A5%E9%97%A8%28with%20xmweng%29.assets/image-20200918112429382.png" alt="image-20200918112429382" style="zoom: 25%;" />
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>              <span class="comment"># 打印当前所在路径</span></span><br><span class="line"></span><br><span class="line">ls               <span class="comment"># 显示当前路径下所有文件</span></span><br><span class="line">ls -a            <span class="comment"># 显示所有文件（包括隐藏文件），linux中以"."开头的都是隐藏文件</span></span><br><span class="line">ls -l            <span class="comment"># 显示所有文件，同时显示文件的权限信息</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$folder_name</span>     <span class="comment"># 进入某个文件夹</span></span><br><span class="line"><span class="built_in">cd</span> ..               <span class="comment"># 进入当前位置的上一级目录</span></span><br><span class="line"></span><br><span class="line">cat <span class="variable">$file_name</span>   <span class="comment"># 在终端界面上直接显示文件内容</span></span><br><span class="line">                 <span class="comment"># eg: cat ~/.ssh/id_rsa.pub   昨天使用的这个指令就是显示id_rsa.pub文件中的内容</span></span><br><span class="line"></span><br><span class="line">vim <span class="variable">$file_name</span>      <span class="comment"># 使用vim编辑一个文件</span></span><br><span class="line">                    <span class="comment"># vim是linux中一个非常强大的文本编辑器，暂时不用太多了解</span></span><br><span class="line">                    <span class="comment"># 可以参考 https://www.runoob.com/linux/linux-vim.html</span></span><br><span class="line">                    <span class="comment"># 之前使用的 git log 就是以vim打开的</span></span><br><span class="line"></span><br><span class="line">clear             <span class="comment"># 清空当前终端窗口所有显示的内容</span></span><br><span class="line"></span><br><span class="line">~         <span class="comment"># linux下这个符号表示当前用户的根目录，在windows中即代表C:\Users\kkklebron</span></span><br><span class="line">          <span class="comment"># 命令行前面的 kkklebron@LAPTOP-B77TN552 就表示当前用户@当前机器</span></span><br></pre></td></tr></table></figure>
 
     </div>
