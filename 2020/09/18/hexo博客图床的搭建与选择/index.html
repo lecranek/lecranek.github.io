@@ -54,8 +54,10 @@
 <meta property="og:description" content="hexo博客图床的搭建与选择考虑到目前本博客的使用频率和更新质量都不高，暂时不使用任何付费性质的服务进行博客完善。因此，最好的图床方案即是使用一些git托管平台作为图床仓库。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/2020-09-18-hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9.assets/image-20200918144554424.png">
+<meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/README.assets/image-20210816164256560.png">
+<meta property="og:image" content="https://gitee.com/lecranek/blog_image/raw/master/README.assets/image-20210816165639962.png">
 <meta property="article:published_time" content="2020-09-18T06:45:07.000Z">
-<meta property="article:modified_time" content="2020-09-18T06:58:11.367Z">
+<meta property="article:modified_time" content="2021-08-16T09:13:34.255Z">
 <meta property="article:author" content="lecranek">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Image Hosting">
@@ -213,10 +215,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-09-18 14:45:07 / Modified: 14:58:11" itemprop="dateCreated datePublished" datetime="2020-09-18T14:45:07+08:00">2020-09-18</time>
+              <time title="Created: 2020-09-18 14:45:07" itemprop="dateCreated datePublished" datetime="2020-09-18T14:45:07+08:00">2020-09-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-16 17:13:34" itemprop="dateModified" datetime="2021-08-16T17:13:34+08:00">2021-08-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -270,9 +278,23 @@
 </ol>
 <p>实现这些功能并不复杂，使用python进行git操作可以参考<a href="https://cloud.tencent.com/developer/article/1520592" target="_blank" rel="noopener">如何使用 Python 操作 Git 代码？GitPython 入门介绍</a>。</p>
 <p><a href="https://gitee.com/lecranek/blog_image/blob/master/typora-upload-img.py" target="_blank" rel="noopener">这里</a>是为脚本源码地址。</p>
-<p>写完脚本以后，在Typora<code>文件-偏好设置-图像</code>中按照图示设置，大功告成！</p>
+<h4 id="OUTDATE"><a href="#OUTDATE" class="headerlink" title="OUTDATE"></a>OUTDATE</h4><p>写完脚本以后，在Typora<code>文件-偏好设置-图像</code>中按照图示设置，大功告成！</p>
 <p><img src="https://gitee.com/lecranek/blog_image/raw/master/2020-09-18-hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%80%89%E6%8B%A9.assets/image-20200918144554424.png" alt="image-20200918144554424"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Custom Command</span><br><span class="line">python <span class="variable">$&#123;local_repo_path&#125;</span>\typora-upload-img.py --mdfile <span class="string">"<span class="variable">$&#123;filename&#125;</span>"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="UPDATE-2021-08-16"><a href="#UPDATE-2021-08-16" class="headerlink" title="UPDATE 2021-08-16"></a>UPDATE 2021-08-16</h4><p>原先的图片插入方式尽管解决了图片的线上化问题，但是在个人使用过程中有以下多种缺陷：</p>
+<ul>
+<li>每次插入图片都同时上传非常影响文档编辑的流畅度</li>
+<li>在一个需要大量插入图片的文档中，执行git提交的次数将过多</li>
+<li>只希望保留图片在本地可见时，必须手动变更typora的首选项</li>
+</ul>
+<p>最近突然发现Typora本身是支持图片插入和上传操作完全分离的，也支持一键上传文档中所有图片。在此基础上，稍微修改一下脚本文件，设置typora插入图片时先复制到本地图库，完成编辑后再利用typora的批量上传功能调用脚本线上化图片，就可以顺利解决以上所有困扰。真香~</p>
+<p><a href="https://gitee.com/lecranek/blog_image/blob/master/typora-upload-img.py" target="_blank" rel="noopener">这里</a>是为脚本源码地址。</p>
+<img src="https://gitee.com/lecranek/blog_image/raw/master/README.assets/image-20210816164256560.png" alt="image-20210816164256560" style="zoom:25%;" />
+
+<img src="https://gitee.com/lecranek/blog_image/raw/master/README.assets/image-20210816165639962.png" alt="image-20210816165639962" style="zoom:25%;" />
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Custom Command</span><br><span class="line">python <span class="variable">$&#123;local_repo_path&#125;</span>\typora-upload-img.py --mdfile <span class="string">"<span class="variable">$&#123;filename&#125;</span>"</span> --imgfile</span><br></pre></td></tr></table></figure>
 
 <h5 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h5><ul>
 <li><p>若md文件为中文名称，或含有空格等，需要将图片URL地址进行转义</p>
@@ -371,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo博客图床的搭建与选择"><span class="nav-number">1.</span> <span class="nav-text">hexo博客图床的搭建与选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora-PicGo-Github"><span class="nav-number">1.1.</span> <span class="nav-text">Typora + PicGo + Github</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora-自定义py脚本-Gitee-实现以文档名称为目录分类管理的图床"><span class="nav-number">1.2.</span> <span class="nav-text">Typora + 自定义py脚本 + Gitee 实现以文档名称为目录分类管理的图床</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Debug"><span class="nav-number">1.2.1.</span> <span class="nav-text">Debug</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo博客图床的搭建与选择"><span class="nav-number">1.</span> <span class="nav-text">hexo博客图床的搭建与选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora-PicGo-Github"><span class="nav-number">1.1.</span> <span class="nav-text">Typora + PicGo + Github</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora-自定义py脚本-Gitee-实现以文档名称为目录分类管理的图床"><span class="nav-number">1.2.</span> <span class="nav-text">Typora + 自定义py脚本 + Gitee 实现以文档名称为目录分类管理的图床</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OUTDATE"><span class="nav-number">1.3.</span> <span class="nav-text">OUTDATE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UPDATE-2021-08-16"><span class="nav-number">1.4.</span> <span class="nav-text">UPDATE 2021-08-16</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Debug"><span class="nav-number">1.4.1.</span> <span class="nav-text">Debug</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -439,7 +461,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共3.1k字</span>
+  <span class="post-count">博客全站共3.4k字</span>
 </div>
 
         
